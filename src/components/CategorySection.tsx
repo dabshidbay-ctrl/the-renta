@@ -22,6 +22,7 @@ const categories = [
     icon: Building2,
     image: apartmentImg,
     pricing: "Monthly rent",
+    elevator: true,
   },
   {
     type: "hotel",
@@ -30,6 +31,7 @@ const categories = [
     icon: Hotel,
     image: hotelImg,
     pricing: "Daily rate",
+    elevator: true,
   },
   {
     type: "commercial",
@@ -38,6 +40,7 @@ const categories = [
     icon: Briefcase,
     image: commercialImg,
     pricing: "Monthly rent",
+    elevator: true,
   },
 ];
 
@@ -87,6 +90,11 @@ const CategorySection = () => {
                 <div className="flex items-center gap-1 text-accent text-xs md:text-sm font-semibold group-hover:gap-2 transition-all">
                   Explore <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 </div>
+                {cat.elevator && (
+                  <div className="mt-1 text-[11px] md:text-xs text-primary-foreground/80 font-medium flex items-center gap-1">
+                    <span role="img" aria-label="Elevator">🛗</span> Elevator available
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
