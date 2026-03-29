@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import InstallPWAButton from "@/components/InstallPWAButton";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -80,9 +81,12 @@ const Header = () => {
               <DropdownMenuItem asChild>
                 <Link to="/properties?type=hotel" className="w-full">Hotels</Link>
               </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/properties?type=commercial" className="w-full">Commercial</Link>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Link to="/properties?type=commercial" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Commercial</Link>
+          <InstallPWAButton />
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
@@ -159,10 +163,10 @@ const Header = () => {
                   <Link to="/properties?type=villa" className="py-1 text-sm font-medium" onClick={() => setIsOpen(false)}>Houses</Link>
                   <Link to="/properties?type=apartment" className="py-1 text-sm font-medium" onClick={() => setIsOpen(false)}>Apartments</Link>
                   <Link to="/properties?type=hotel" className="py-1 text-sm font-medium" onClick={() => setIsOpen(false)}>Hotels</Link>
+                  <Link to="/properties?type=commercial" className="py-1 text-sm font-medium" onClick={() => setIsOpen(false)}>Commercial</Link>
                 </div>
               </div>
-
-              <Link to="/properties?type=commercial" className="py-2 text-sm font-medium" onClick={() => setIsOpen(false)}>Commercial</Link>
+              <InstallPWAButton />
 
               <div className="pt-2 border-t border-border">
                 {isLoggedIn ? (
