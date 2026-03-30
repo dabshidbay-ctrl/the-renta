@@ -20,7 +20,7 @@ import {
 import { MOGADISHU_DISTRICTS } from "@/lib/districts";
 import { motion, AnimatePresence } from "framer-motion";
 
-type PropertyType = "villa" | "apartment" | "hotel";
+type PropertyType = "house" | "apartment" | "hotel" | "commercial";
 
 const steps = ["Type", "Details", "Amenities", "Photos", "Review"];
 
@@ -70,6 +70,7 @@ const AddProperty = () => {
     floor_number: "1",
     has_balcony: false,
     is_furnished: false,
+    has_elevator: false,
   });
 
   const updateForm = (key: string, value: string | boolean) => {
@@ -123,14 +124,15 @@ const AddProperty = () => {
           location: form.location.trim(),
           is_daily_rate: isHotel,
           bedrooms: Number(form.bedrooms) || null,
-          living_rooms: form.type === "villa" ? Number(form.living_rooms) || null : null,
-          kitchens: (form.type === "villa" || form.type === "apartment") ? Number(form.kitchens) || null : null,
+            living_rooms: form.type === "house" ? Number(form.living_rooms) || null : null,
+            kitchens: (form.type === "house" || form.type === "apartment") ? Number(form.kitchens) || null : null,
           toilets: Number(form.toilets) || null,
           has_cctv: form.has_cctv,
           has_parking: form.has_parking,
           floor_number: form.type === "apartment" ? Number(form.floor_number) || null : null,
           has_balcony: form.type === "apartment" ? form.has_balcony : false,
           is_furnished: form.is_furnished,
+          has_elevator: (form.type === "apartment" || form.type === "hotel" || form.type === "commercial") ? form.has_elevator : false,
         })
         .select("id")
         .single();
@@ -215,7 +217,7 @@ const AddProperty = () => {
               <div className="space-y-3">
                 <p className="text-sm font-medium text-foreground mb-4">What type of property are you listing?</p>
                 {([
-                  { value: "villa", label: "House", icon: Home, desc: "Full home with rooms & amenities — monthly rent" },
+                  { value: "house", label: "House", icon: Home, desc: "Full home with rooms & amenities — monthly rent" },
                   { value: "apartment", label: "Apartment", icon: Building2, desc: "Apartment unit with floor & balcony — monthly rent" },
                   { value: "hotel", label: "Hotel", icon: Hotel, desc: "Hotel room or suite — daily rate" },
                   { value: "commercial", label: "Commercial", icon: Briefcase, desc: "Office, shop or business space — monthly rent" },
@@ -338,7 +340,7 @@ const AddProperty = () => {
                   </div>
                 </div>
 
-                {form.type === "villa" && (
+                {form.type === "house" && (
                   <div className="grid grid-cols-2 gap-3">
                     <div className="space-y-2">
                       <Label className="text-xs text-muted-foreground flex items-center gap-1"><Sofa className="w-3.5 h-3.5" /> Living Rooms</Label>
@@ -387,10 +389,10 @@ const AddProperty = () => {
                     <Label className="flex items-center gap-2 text-sm text-foreground"><Armchair className="w-4 h-4 text-muted-foreground" /> Furnished</Label>
                     <Switch checked={form.is_furnished} onCheckedChange={(v) => updateForm("is_furnished", v)} />
                   </div>
-                  {form.type === "apartment" && (
+                  {(form.type === "apartment" || form.type === "hotel" || form.type === "commercial") && (
                     <div className="flex items-center justify-between py-3 border-b border-border">
-                      <Label className="flex items-center gap-2 text-sm text-foreground"><Waves className="w-4 h-4 text-muted-foreground" /> Balcony</Label>
-                      <Switch checked={form.has_balcony} onCheckedChange={(v) => updateForm("has_balcony", v)} />
+                      <Label className="flex items-center gap-2 text-sm text-foreground"><span role="img" aria-label="Elevator">🛗</span> Elevator</Label>
+                      <Switch checked={form.has_elevator} onCheckedChange={(v) => updateForm("has_elevator", v)} />
                     </div>
                   )}
                 </div>
@@ -428,6 +430,7 @@ const AddProperty = () => {
                     {form.has_cctv && <span className="flex items-center gap-1"><Cctv className="w-3.5 h-3.5" />CCTV</span>}
                     {form.has_parking && <span className="flex items-center gap-1"><Car className="w-3.5 h-3.5" />Parking</span>}
                     {form.has_balcony && <span className="flex items-center gap-1"><Waves className="w-3.5 h-3.5" />Balcony</span>}
+                    {form.has_elevator && <span className="flex items-center gap-1"><span role="img" aria-label="Elevator">🛗</span>Elevator</span>}
                   </div>
                   <p className="text-xs text-muted-foreground flex items-center gap-1"><ImageIcon className="w-3.5 h-3.5" /> {photos.length} photo{photos.length !== 1 ? "s" : ""}</p>
                 </div>

@@ -168,6 +168,7 @@ const typeLabels: Record<string, string> = {
     property.has_cctv && { icon: Cctv, label: "CCTV Security", color: "bg-destructive/10 text-destructive" },
     property.has_parking && { icon: Car, label: "Parking Available", color: "bg-success/10 text-success" },
     property.is_furnished && { icon: Armchair, label: "Furnished", color: "bg-primary/10 text-primary" },
+    property.has_elevator && { icon: () => <span role="img" aria-label="Elevator">🛗</span>, label: "Elevator", color: "bg-primary/10 text-primary" },
   ].filter(Boolean) as { icon: React.ElementType; label: string; color: string }[];
 
   return (

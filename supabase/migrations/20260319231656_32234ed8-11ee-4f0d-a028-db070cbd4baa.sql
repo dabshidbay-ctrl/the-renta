@@ -9,7 +9,7 @@ BEGIN
   INSERT INTO public.profiles (user_id, full_name, phone, phone2, phone3)
   VALUES (
     NEW.id,
-    COALESCE(NEW.raw_user_meta_data->>'full_name', ''),
+    COALESCE(NEW.raw_user_meta_data->>'full_name', ''), 
     NULLIF(NEW.raw_user_meta_data->>'phone', ''),
     NULLIF(NEW.raw_user_meta_data->>'phone2', ''),
     NULLIF(NEW.raw_user_meta_data->>'phone3', '')
@@ -25,3 +25,4 @@ BEGIN
   RETURN NEW;
 END;
 $$;
+

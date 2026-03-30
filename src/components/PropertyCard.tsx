@@ -119,6 +119,11 @@ const PropertyCard = ({ property, onClick, isFavorite, onToggleFavorite, isAuthe
               <Building2 className="w-3.5 h-3.5" /> Floor {property.floor_number}
             </span>
           )}
+          {property.has_elevator && (
+            <span className="flex items-center gap-1">
+              <span role="img" aria-label="Elevator">🛗</span> Elevator
+            </span>
+          )}
         </div>
 
         {/* Deposit */}

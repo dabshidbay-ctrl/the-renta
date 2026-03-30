@@ -1,3 +1,4 @@
+import type { UserRole } from "@/lib/types";
 import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -24,6 +25,7 @@ const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -47,8 +49,9 @@ const App = () => (
             <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['owner', 'agent', 'hotel_manager']}><Dashboard /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><ProfileSettings /></ProtectedRoute>} />
             <Route path="/saved" element={<ProtectedRoute><Saved /></ProtectedRoute>} />
-            <Route path="/admin-panel" element={<ProtectedRoute allowedRoles={['admin']}><Admin /></ProtectedRoute>} />
-            <Route path="/semiadmin" element={<ProtectedRoute allowedRoles={['semi_admin']}><SemiAdmin /></ProtectedRoute>} />
+            <Route path="/admin-panel" element={<ProtectedRoute allowedRoles={['admin' as UserRole]}><Admin /></ProtectedRoute>} />
+            <Route path="/semiadmin" element={<ProtectedRoute allowedRoles={['semi_admin' as UserRole, 'admin' as UserRole]}><SemiAdmin /></ProtectedRoute>} />
+            {/* HotelProfile routes removed */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

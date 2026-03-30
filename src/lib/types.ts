@@ -1,6 +1,6 @@
 export type PropertyType = "house" | "apartment" | "hotel" | "commercial";
 
-export type UserRole = "user" | "owner" | "hotel_manager" | "agent";
+export type UserRole = "user" | "owner" | "hotel_manager" | "agent" | "admin" | "semi_admin";
 
 export interface Property {
   id: string;
@@ -27,6 +27,8 @@ export interface Property {
   // Hotel specific (price is per night)
   is_daily_rate?: boolean;
   is_furnished?: boolean;
+  // Universal amenity
+  has_elevator?: boolean;
 }
 
 export interface UserProfile {
