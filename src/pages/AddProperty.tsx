@@ -132,7 +132,7 @@ const AddProperty = () => {
           floor_number: form.type === "apartment" ? Number(form.floor_number) || null : null,
           has_balcony: form.type === "apartment" ? form.has_balcony : false,
           is_furnished: form.is_furnished,
-          has_elevator: (form.type === "apartment" || form.type === "hotel" || form.type === "commercial") ? form.has_elevator : false,
+          has_elevator: form.has_elevator,
         })
         .select("id")
         .single();
@@ -389,12 +389,10 @@ const AddProperty = () => {
                     <Label className="flex items-center gap-2 text-sm text-foreground"><Armchair className="w-4 h-4 text-muted-foreground" /> Furnished</Label>
                     <Switch checked={form.is_furnished} onCheckedChange={(v) => updateForm("is_furnished", v)} />
                   </div>
-                  {(form.type === "apartment" || form.type === "hotel" || form.type === "commercial") && (
-                    <div className="flex items-center justify-between py-3 border-b border-border">
-                      <Label className="flex items-center gap-2 text-sm text-foreground"><span role="img" aria-label="Elevator">🛗</span> Elevator</Label>
-                      <Switch checked={form.has_elevator} onCheckedChange={(v) => updateForm("has_elevator", v)} />
-                    </div>
-                  )}
+                  <div className="flex items-center justify-between py-3 border-b border-border">
+                    <Label className="flex items-center gap-2 text-sm text-foreground"><span role="img" aria-label="Elevator">🛗</span> Elevator</Label>
+                    <Switch checked={form.has_elevator} onCheckedChange={(v) => updateForm("has_elevator", v)} />
+                  </div>
                 </div>
               </div>
             )}
